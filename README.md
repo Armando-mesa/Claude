@@ -1,2 +1,2 @@
-# Cluade
+# Claude
 Contenidos de Claude code
