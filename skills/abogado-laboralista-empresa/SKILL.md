@@ -186,7 +186,7 @@ En los cálculos, el **salario diario** es el salario bruto anual (con prorratas
 
 La tabla de referencia **no es la que va dentro de esta skill**, sino un archivo externo que se puede actualizar:
 
-- **Repositorio:** `Armando-mesa/claude` (GitHub, privado), rama `main`
+- **Repositorio:** `Armando-mesa/Claude` (GitHub, privado; `claude` en minúsculas también funciona), rama `main`
 - **Archivo:** `skills/abogado-laboralista-empresa/vigencia.md`
 
 ### Lectura (al inicio de cada consulta laboral)
@@ -212,7 +212,11 @@ La tabla de referencia **no es la que va dentro de esta skill**, sino un archivo
 
    Solo una fila con fuente primaria verificable puede pasar a **ACTUALIZADA** o **NUEVA**. Si solo hay fuentes secundarias, la fila se marca `[PENDIENTE CONFIRMAR EN BOE]` y no se cambia el estado.
 5. Pregunta: "¿Aplico estos cambios en GitHub? SÍ / NO / SELECTIVO".
-6. Solo con un **SÍ explícito**: reescribe el archivo completo, actualizando "Última revisión" y añadiendo una entrada al *Registro de cambios* con fecha y filas tocadas. Guárdalo con `create_or_update_file` pasando el `sha` leído, con el mensaje `chore(vigencia): revisión AAAA-MM-DD — N cambios`. Si el `sha` no coincide (alguien lo ha cambiado entretanto), vuelve a leer el archivo y repite la comparación.
+6. Solo con un **SÍ explícito**: reescribe el archivo completo, actualizando "Última revisión" y añadiendo una entrada al *Registro de cambios* con fecha y filas tocadas. Mensaje de commit: `chore(vigencia): revisión AAAA-MM-DD — N cambios`. Para escribir, usa este orden:
+   1. **Conector GitHub del ordenador del usuario** (`github-skills`, disponible cuando la conversación está vinculada al ordenador): `push_files` (owner `Armando-mesa`, repo `Claude`, rama `main`). Es el que tiene permiso de escritura.
+   2. Si no está disponible, prueba el conector GitHub de la nube (`create_or_update_file` con el `sha` leído). A fecha 2026-10-07 este conector es **solo lectura** (error 403 "Resource not accessible by integration").
+   3. Si ambos fallan, entrega el contenido completo del nuevo `vigencia.md` para que el usuario lo pegue, y di claramente que **no se ha guardado**.
+   Antes de escribir, si el archivo ha cambiado desde que lo leíste, vuelve a leerlo y repite la comparación.
 7. Confirma el commit (hash corto) y avisa de si hace falta actualizar también la copia de respaldo de la skill (solo cuando haya cambios materiales).
 
 **En una ejecución programada** (sin nadie que responda): haz los pasos 1 a 4, **no hagas commit**, y deja el informe como resultado para que el usuario lo apruebe después. Excepción: si todas las filas quedan SIN CAMBIOS, puedes hacer commit solo de la fecha de "Última revisión".
