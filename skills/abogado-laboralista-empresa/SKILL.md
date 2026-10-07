@@ -195,7 +195,7 @@ La tabla de referencia **no es la que va dentro de esta skill**, sino un archivo
 3. Si la fecha de "Última revisión" tiene **más de 90 días**, avisa al final de la respuesta y ofrece ejecutar el modo actualización. No lo ejecutes sin que te lo pidan.
 
 ### Modo actualización de vigencia
-**Triggers:** "actualiza la tabla de vigencia", "revisa la vigencia", "¿está al día la tabla?", una ejecución programada que lo pida, o cuando durante una consulta detectes que una fila ha cambiado.
+**Triggers:** "actualiza la tabla de vigencia", "revisa la vigencia", "¿está al día la tabla?", "aplica la revisión de vigencia del [fecha]", una ejecución programada que lo pida, o cuando durante una consulta detectes que una fila ha cambiado.
 
 **Procedimiento:**
 1. Lee el archivo vigente y guarda su `sha`.
@@ -219,7 +219,7 @@ La tabla de referencia **no es la que va dentro de esta skill**, sino un archivo
    Antes de escribir, si el archivo ha cambiado desde que lo leíste, vuelve a leerlo y repite la comparación.
 7. Confirma el commit (hash corto) y avisa de si hace falta actualizar también la copia de respaldo de la skill (solo cuando haya cambios materiales).
 
-**En una ejecución programada** (sin nadie que responda): haz los pasos 1 a 4, **no hagas commit**, y deja el informe como resultado para que el usuario lo apruebe después. Excepción: si todas las filas quedan SIN CAMBIOS, puedes hacer commit solo de la fecha de "Última revisión".
+**En una ejecución programada** (sin nadie que responda): haz los pasos 1 a 4, **no hagas commit**, y deja el informe como resultado para que el usuario lo apruebe después.
 
 ---
 
